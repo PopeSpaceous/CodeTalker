@@ -11,3 +11,6 @@ Get a barebones Extension to VSCode up -> Add Voice to Text Feature to Extension
 
 
 Add research notes as a wiki page. 
+
+
+Here is the [Slack group chat] (https://join.slack.com/t/codetalkerworkspace/shared_invite/enQtNDcyMjQ4MjYzNzMwLTYzMjM4MDUwMzAzYTc1MjBhNDNjZWM5MGU5Y2FkODUzMWZjM2M4NjJlZGZkYjIwNTNlYzM1NGQxOGYzNDUyOTY) where we discuss any issues and suggestions regarding this project.
