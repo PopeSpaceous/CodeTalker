@@ -8,6 +8,18 @@ Current Loose Goal Timeline:
 Get a barebones Extension to VSCode up -> Add Voice to Text Feature to Extension (Minimal version to see how it works) -> Add our code for command issues with corresponding HTML converters.
 
 
+Setting up a barebones extention:
+
+Our extension is based off of this one currently
+Followthe guide @ https://code.visualstudio.com/docs/extensions/example-hello-world
+
+In order to test the functionality of this app, you need to open codeTalker > hit f5 > enter the command prompt: ctrl + shift + p > type in a command (In this case it's simply 'hello world' ). In order to change this command, we edit a package.json file, seen here
+-- We can change this stuff asap.
+
+Another thing to note. I usually run a Linux environment, with VSCode v 1.28.x
+1.28 MUST be installed to debug the extension (any platform). So make sure that is the case.
+However, my Linux machine was unable to properly open 'Extension Development' mode when debugging the extension. So I had to switch over to my Windows machine.:
+
 
 
 Add research notes as a wiki page. 
