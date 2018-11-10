@@ -1,6 +1,11 @@
 # CodeTalker
 A Visual Studio Code Add-on that allows Speech to HTML code. 
 
+Why is it needed? 
+Many people have trouble coding when trying to use voice commands. Our vision is to build a comprehensive extension to enable speech to text coding. 
+Here is a current issue for VSCode about dictation support: 
+[https://github.com/Microsoft/vscode/issues/40976](https://github.com/Microsoft/vscode/issues/40976)
+
 Visit the wiki for [a list of helpful research links](https://github.com/PopeSpaceous/CodeTalker/wiki/Helpful-Links). 
 
 Current Loose Goal Timeline:
