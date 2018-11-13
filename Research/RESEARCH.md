@@ -61,7 +61,7 @@ Description: Call C/C++ code or use a native library from a Node.js app.
 Usage: We could use this to talk from a c/c++ application to our javascript extension.
 
 [Event Listeners In VSCode JS](https://code.visualstudio.com/docs/extensions/example-word-count#_subscribing-to-events)
-Usage: Detect Change in text, used for replacement of text commands, eg. (h5 tag   ->   <h5></h5>)
+Usage: Detect Change in text, used for replacement of text commands, eg. (h5 tag   ->   ``<h5></h5>``)
 
 [VSCode code listing](https://code.visualstudio.com/docs/extensionAPI/vscode-api)
 Description: Shows a listing of classes and methods to use for programming. 
