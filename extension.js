@@ -3,8 +3,10 @@
 const vscode = require('vscode');
 const mic = require('mic')
 const fs = require('fs')
+const spawn = require('child_process')
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
+
 function activate(context) {
 
     // Use the console to output diagnostic information (console.log) and errors (console.error)
@@ -18,62 +20,58 @@ function activate(context) {
         // The code you place here will be executed every time your command is executed
 
         // Display a message box to the user
-        vscode.window.showInformationMessage('Hello World!');
+        vscode.window.showInformationMessage('Start using your microphone!');
 
+        /* 
+        The mic instance is handled as a JSON input, whereby we can set the defaults for the microphone.
+        I had to brute force the device name, because the default 'mic' module did not pick it up.
+        Also, it had channels set to MONO, which my computer does not have as it's default...the default is Stereo (2)
+        */
+
+        /* Info on the micInstance can be found here: https://www.npmjs.com/package/mic */
         var micInstance = mic({
             rate: '16000',
-            channels: '1',
+            channels: '2',
             debug: true,
-            exitOnSilence: 6
+            exitOnSilence: 6,
+            fileType: '.wav',
+            device: 'hw:0,0'
         });
-        
-        var micInputStream = micInstance.getAudioStream();
-        var outputFileStream = fs.createWriteStream('output.raw');
 
+        /*
+        - This is where we start the mic instance, using the above presets.
+        getAudioStream() returns a Transform stream. 
+        - We use a fs stream to create an output file.
+        - The micInputStream is then written to the outputFile, using pipe() from node's Stream API,
+        in order to open in Python.
+        - This file will get rewritten everytime the mic is stopped and started up again.
+        */
+        var micInputStream = micInstance.getAudioStream();
+        var outputFileStream = fs.createWriteStream('output.wav');
         micInputStream.pipe(outputFileStream);
 
-        micInputStream.on('data', function (data) {
-            console.log("Recieved Input Stream: " + data.length);
-        });
 
-        micInputStream.on('error', function (err) {
-            console.log("Error in Input Stream: " + err);
-        });
-
-        micInputStream.on('startComplete', function () {
-            console.log("Got SIGNAL startComplete");
-            setTimeout(function () {
-                micInstance.pause();
-            }, 5000);
-        });
-
-        micInputStream.on('stopComplete', function () {
-            console.log("Got SIGNAL stopComplete");
-        });
-
-        micInputStream.on('pauseComplete', function () {
-            console.log("Got SIGNAL pauseComplete");
-            setTimeout(function () {
-                micInstance.resume();
-            }, 5000);
-        });
-
-        micInputStream.on('resumeComplete', function () {
-            console.log("Got SIGNAL resumeComplete");
+        var startMic = new Promise(function (resolve, reject) {
+            micInstance.start();
             setTimeout(function () {
                 micInstance.stop();
-            }, 5000);
-        });
+                resolve();
+            }, 6000)
+            // outputFileStream.close();
 
-        micInputStream.on('silence', function () {
-            console.log("Got SIGNAL silence");
-        });
+        })
 
-        micInputStream.on('processExitComplete', function () {
-            console.log("Got SIGNAL processExitComplete");
-        });
+        startMic.then(function () {
+            spawn.exec('python repos/CodeTalker/speech.py', (error, stdout, stderr) => {
+                console.log("going to gather the words...")
+                if (error) {
+                    console.error(`exec error: ${error}`);
+                    return;
+                }
+                console.log(`Words you spoke: ${stdout}`);
+            });
+        })
 
-        micInstance.start();
     });
 
     context.subscriptions.push(disposable);
