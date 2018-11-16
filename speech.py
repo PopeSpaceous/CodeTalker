@@ -1,7 +1,10 @@
 import speech_recognition as sr
+import os 
 
 r = sr.Recognizer()
-test = sr.AudioFile('/home/stephen/output.wav')
+if not os.path.isdir("./micAudio"):
+    os.mkdir("./micAudio")
+test = sr.AudioFile('./micAudio/output.wav')
 with test as source:
     audio = r.record(source)
 
