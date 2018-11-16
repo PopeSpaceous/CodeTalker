@@ -2,6 +2,9 @@
 
 To record packages and potential strategies that can potentially be used to take mic input from a user's device and parse it to a stream or audio file for later processing
 
+## current posted attempts:
+The mic-testing branch has code that attempts to use the [Python SpeechRecognition library](https://pypi.org/project/SpeechRecognition/), which requires several dependencies to install (python, python-pip, etc). It is allegedly compatible with both pocketsphinx (a variant of CMUSphinx), and the google speech-to-text cloud api. 
+
 ## Sets of packages:
 
 ### mic-stream, arecord, and sox:
