@@ -6,7 +6,7 @@ This is a research file to store information about possible code construction of
 
 #### CMUSphinx #####
 
-[PocketShpinx](https://github.com/cmusphinx/pocketsphinx)
+[PocketSphinx](https://github.com/cmusphinx/pocketsphinx)
 Description: a lightweight speech recognition engine, specifically tuned for handheld and mobile devices, though it works equally well on the desktop.
 **Needs SphinxBase**
 [Sphinx Tutorial](https://cmusphinx.github.io/wiki/tutorialpocketsphinx/)
@@ -15,6 +15,7 @@ Sample StT Test
 We said, “Hello sphinx, how are you doing? This is just a test.” 
 Sphinx heard, “for the to it or who are not looking is the biggest test”
 
+One possible redeeming factor is that PocketSphinx may allow us to build a ["phoenetic dictionary"](https://cmusphinx.github.io/wiki/tutorialdict/)... however it's unclear what kind of gains you might get to speech recognition acccuracy by implementing this. This is indeed "the biggest test". 
 
 
 #### Kaldi ####
@@ -37,7 +38,10 @@ Links: [Install gcc on windows Cygwin](https://preshing.com/20141108/how-to-inst
 Notes: We haven't tested this route because they are unix based only. They may be useful in the future so we'll make note of them here.
 We found them in a [chat in this repository](https://github.com/noffle/electron-speech/issues/9)
 
+### Google Cloud Speech-to-Text ###
 
+[see the writeup here](./using-google-speech-to-text.md)
+This would require repo contributors to provide their credit card info/immortal souls to the great entity that is Google. The payoff might be speech recognition that doesn't exercise poetic license like PocketSphinx did, though. 
 
 -----------------------------------------------------------------------------------------
 ## Helpful Links: ##
