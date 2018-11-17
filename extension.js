@@ -47,7 +47,9 @@ function activate(context) {
         - This file will get rewritten everytime the mic is stopped and started up again.
         */
         var micInputStream = micInstance.getAudioStream();
-        var outputFileStream = fs.createWriteStream('output.wav');
+        const streamDest = __dirname + "/micAudio/output.wav";
+        const pyScriptLoc = __dirname + "/speech.py";
+        var outputFileStream = fs.createWriteStream(streamDest);
         micInputStream.pipe(outputFileStream);
 
 
@@ -62,7 +64,7 @@ function activate(context) {
         })
 
         startMic.then(function () {
-            spawn.exec('python repos/CodeTalker/speech.py', (error, stdout, stderr) => {
+            spawn.exec('python ' + pyScriptLoc, {cwd: __dirname}, (error, stdout, stderr) => {
                 console.log("going to gather the words...")
                 if (error) {
                     console.error(`exec error: ${error}`);
