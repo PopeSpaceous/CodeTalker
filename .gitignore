@@ -1,4 +1,4 @@
 node_modules
 .vscode-test/
 *.vsix
-micAudio/*.wav
+micContainer/containerFiles/micAudio/*.wav
