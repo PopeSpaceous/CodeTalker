@@ -28,6 +28,44 @@ Linux machines may be unable to properly open 'Extension Development' window whe
 
 ----------------------------------------------------------------------------
 
+## Developing the extension with Docker:
+
+The required Nodejs scripts for capturing microphone audio, along with the python script that parses text from the audio have now been moved to run in a Docker container.
+
+**Note: the current implementation in extension.js only mounts microphone hardware for Unix style systems where hardware is mounted to the diretory system**
+
+### Start by building the Docker Image
+
+- **Start by installing Docker** if you don't have it on your system already: [Installation instructions for a variety of systems can be found in this document](https://docs.docker.com/install/#supported-platforms_)
+
+- **Build the Docker image:** Navigate to CodeTalker/micContainer, and execute the command:
+> docker build -t mic-container .
+
+Don't forget the "." at the end of this command since it indicates you want to use the Dockerfile in the current directory. The first build will take a few minutes, but any later builds will be faster since Docker caches parts of the build process.
+
+
+## Test Run the Extension to see if it works:
+
+- After building the docker image, you should be able to test the VS Code extension. 
+- In an instance of VS Code with the code repo open, hit 'F5' to start debugging. This should bring up a new VS Code window labelled "[Extension Development Host]". 
+- To launch the extension, bring up the command pallette (Ctrl + Shift + P).
+- Type "Code Talker" into the pallette and hit enter. Alternately, you can select "Code Talker" from the dropdown under the command pallette since it should be the first option.
+- Start talking into your computer's microphone. **Currently, the extension will exit after 6 seconds of silence.**
+
+**All speech to text code is now located in the micContainer/containerFiles directory to be sent off to Docker. Any other code is located in the repo's root folder.** The main code for the extension is located in extension.js. The micContainer/containerFiles directory is mounted to the Docker vm, so all you have to do is save your changes to the scripts after you've edited them, and they will be mounted to an instance of a Docker container when you run the extension. Since this directory contains node modules independent from the the rest of the extension's code, it has it's own package.json file for its own dependencies.
+
+
+- Currently all shared changes to the docker image come from the Dockerfile since no images are provided/hosted. Note also that in extension.js, we mount both the mic hardware (/dev/snd) and the micContainer/containerFiles directories when we run the docker image. This means that if you want to run the image yourself in the terminal with everything mounted, you will need to determine the correct command there based on your computer's file structure. Here's an example:
+
+> docker run -v /dev/snd:/dev/snd -v /home/me/Documents/openSrc/CodeTalker/CodeTalker/micContainer/containerFiles:/src/micListener -it --privileged mic-container
+
+The "-it" flag runs the container, and puts you in a terminal for the container. Use the "exit" command to exit and shut down the container.
+
+
+----------------------------------
+
+
+
 
 Add research notes as a wiki page. 
 
