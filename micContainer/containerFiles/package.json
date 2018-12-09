@@ -1,0 +1,15 @@
+{
+  "name": "mic-service",
+  "version": "1.0.0",
+  "description": "takes mic audio and parses it to text on stdout",
+  "main": "mic-listener.js",
+  "scripts": {
+    "start": "npm i && node mic-listener",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "0BSD",
+  "dependencies": {
+    "mic": "^2.1.2"
+  }
+}
