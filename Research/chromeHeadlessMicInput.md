@@ -105,7 +105,7 @@ Neat. We have a webpage that we can supposedly run with a Chrome headless browse
 
 You should get a bunch of raw html output from this command:
 
-![1544657937840](C:\Users\Michael\AppData\Roaming\Typora\typora-user-images\1544657937840.png)
+![](./imgs/chrome-headless/chrome-windows-dump.png)
 
 
 
@@ -123,7 +123,7 @@ You should get a bunch of raw html output from this command:
    > google-chrome --headless --dump-dom https://www.chromestatus.com
 
 
-![1544659001622](C:\Users\Michael\AppData\Roaming\Typora\typora-user-images\1544659001622.png)
+![](./imgs/chrome-headless/chrome-ubuntu-dump.png)
 
 
 
@@ -139,13 +139,13 @@ let's try to open our html file for capturing mic audio in chrome headless:
 
 ...and, as expected, nothing seems to happen (especially since we didn't use the --dump-dom flag since we want to run the page)
 
-![1544674125362](C:\Users\Michael\AppData\Roaming\Typora\typora-user-images\1544674125362.png)
+![](./imgs/chrome-headless/chrome-mic-anticlimax.png)
 
 The page (probably) loaded, but it's not listening to the microphone.
 
 This is probably because we have to [find the default profile loaded with Chrome Headless](http://www.forensicswiki.org/wiki/Google_Chrome#Configuration), copy it, [change the copy to allow automatic permission to microphone input](https://stackoverflow.com/questions/38832776/how-do-i-allow-chrome-to-use-my-microphone-programatically), and change the profile that chrome headless uses (if possible).
 
-
+![](./imgs/chrome-headless/chrome-edit-preference.png)
 
 Currently, attempts to manually edit Chrome's 'Preference' file lead to Chrome rejecting the changes and reverting the Preference file on launch.
-
+There is probably a way to add the ability to give a file default access. It could be that I was copying the last accessed date, and other JSON values for existing entries to fill in my new object for accessing my microphone testing html file, and this was invalid because Chrome had no history of this new file being accessed.
